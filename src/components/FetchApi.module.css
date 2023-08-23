@@ -1,15 +1,25 @@
-.boxHead{
+.tableHead{
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(2,1fr);
     text-align: center;
     font-weight: 800;
     color: white;
     background-color: black;
 }
-.box{
+.headWrapper{
+    display: flex;
+    justify-content: space-around;
+}
+.items{
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(2,1fr);
+    align-items: center;
     text-align: center;
+    border-bottom: 2px solid black;
+}
+.item{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
     font-weight: 800;
     margin: 1rem 0;
 }

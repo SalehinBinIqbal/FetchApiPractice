@@ -6,7 +6,7 @@ function FetchApi() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://reqres.in/api/posts")
+    fetch("https://api.npms.io/v2/search?q=react")
       .then((resource) => {
         if (resource.ok) {
           return resource.json();
@@ -22,23 +22,33 @@ function FetchApi() {
       });
   }, []);
 
+  const postData = {};
+
   return (
     <>
       {error && <p>There is a error</p>}
-      <div className={classes.boxHead}>
-        <p>ID</p>
-        <p>Name</p>
-        <p>Year</p>
-        <p>Color</p>
+      <div className={classes.tableHead}>
+        <div className={classes.headWrapper}>
+          <p>Name</p>
+          <p>Email</p>
+        </div>
+        <p>Score</p>
       </div>
       {data &&
-        data.data.map((info) => {
+        data.results.map((info) => {
           return (
-            <div className={classes.box} key={info.id}>
-              <p>{info.id}</p>
-              <p>{info.name}</p>
-              <p>{info.year}</p>
-              <p>{info.color}</p>
+            <div className={classes.items}>
+              <div>
+                {info.package.maintainers.map((item, index) => {
+                  return (
+                    <div className={classes.item} key={index}>
+                      <p>{item.username}</p>
+                      <p>{item.email}</p>
+                    </div>
+                  );
+                })}
+              </div>
+              <p>{info.score.final}</p>
             </div>
           );
         })}
