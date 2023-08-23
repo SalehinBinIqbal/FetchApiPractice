@@ -30,7 +30,10 @@ function PostApi() {
         setPassword("");
         setButtonText("Create");
         setPrompt("User created successfully");
-      } else setPrompt("Opps! Something bad happened");
+      } else {
+        setPrompt("Opps! Something bad happened");
+        throw res;
+      }
     } catch (error) {
       console.log(error);
     }
