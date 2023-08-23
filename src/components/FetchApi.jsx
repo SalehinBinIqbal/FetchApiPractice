@@ -46,7 +46,7 @@ function FetchApi() {
                   );
                 })}
               </div>
-              <p>{info.score.final}</p>
+              <p>{info.score.detail.maintenance}</p>
             </div>
           );
         })}
