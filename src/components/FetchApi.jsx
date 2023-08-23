@@ -22,8 +22,6 @@ function FetchApi() {
       });
   }, []);
 
-  const postData = {};
-
   return (
     <>
       {error && <p>There is a error</p>}
