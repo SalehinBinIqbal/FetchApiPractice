@@ -25,7 +25,7 @@ function FetchApi() {
   return (
     <>
       {error && <p>There is a error</p>}
-      <div className={classes.title}>
+      <div className={classes.boxHead}>
         <p>ID</p>
         <p>Name</p>
         <p>Year</p>
