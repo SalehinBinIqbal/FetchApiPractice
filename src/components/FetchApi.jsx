@@ -5,48 +5,54 @@ function FetchApi() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetch("https://api.npms.io/v2/search?q=react")
-      .then((resource) => {
-        if (resource.ok) {
-          return resource.json();
-        }
-        throw resource;
-      })
-      .then((data) => {
-        setData(data);
-      })
-      .catch((error) => {
-        console.log(error);
-        setError(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://api.npms.io/v2/search?q=react")
+  //     .then((resource) => {
+  //       if (resource.ok) {
+  //         return resource.json();
+  //       }
+  //       throw resource;
+  //     })
+  //     .then((data) => {
+  //       setData(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setError(error);
+  //     });
+  // }, []);
+
+  const showData = async () => {
+    try {
+      const res = await fetch("https://reqres.in/api/posts");
+      if (!res.ok) {
+        throw res;
+      }
+      const result = await res.json();
+      setData(result);
+    } catch (error) {
+      setError(error);
+    }
+  };
 
   return (
     <>
-      {error && <p>There is a error</p>}
+      {error && <h1>There is a error</h1>}
       <div className={classes.tableHead}>
-        <div className={classes.headWrapper}>
-          <p>Name</p>
-          <p>Email</p>
-        </div>
-        <p>Score</p>
+        <p>ID</p>
+        <p>Name</p>
+        <p>Year</p>
+        <p>Color</p>
       </div>
+      <button onClick={showData}>Show Data</button>
       {data &&
-        data.results.map((info) => {
+        data.data.map((info) => {
           return (
-            <div className={classes.items}>
-              <div>
-                {info.package.maintainers.map((item, index) => {
-                  return (
-                    <div className={classes.item} key={index}>
-                      <p>{item.username}</p>
-                      <p>{item.email}</p>
-                    </div>
-                  );
-                })}
-              </div>
-              <p>{info.score.detail.maintenance}</p>
+            <div className={classes.item} key={info.id}>
+              <p>{info.id}</p>
+              <p>{info.name}</p>
+              <p>{info.year}</p>
+              <p>{info.color}</p>
             </div>
           );
         })}
