@@ -24,6 +24,7 @@ function PostApi() {
         console.log(res);
         if (res.ok) {
           const resJson = res.json();
+          console.log(resJson);
           setName("");
           setEmail("");
           setPassword("");
