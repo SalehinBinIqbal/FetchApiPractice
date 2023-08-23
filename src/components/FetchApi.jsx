@@ -24,12 +24,16 @@ function FetchApi() {
 
   const showData = async () => {
     try {
-      const res = await fetch("https://reqres.in/api/posts");
-      if (!res.ok) {
-        throw res;
-      }
-      const result = await res.json();
-      setData(result);
+      fetch("https://reqres.in/api/posts")
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          throw res;
+        })
+        .then((data) => {
+          setData(data);
+        });
     } catch (error) {
       setError(error);
     }
@@ -44,7 +48,6 @@ function FetchApi() {
         <p>Year</p>
         <p>Color</p>
       </div>
-      <button onClick={showData}>Show Data</button>
       {data &&
         data.data.map((info) => {
           return (
@@ -56,6 +59,9 @@ function FetchApi() {
             </div>
           );
         })}
+      <div className={classes.btn}>
+        <button onClick={showData}>Show Data</button>
+      </div>
     </>
   );
 }

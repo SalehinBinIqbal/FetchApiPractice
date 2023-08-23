@@ -3,8 +3,7 @@ import PostApi from "./components/PostApi";
 
 function App() {
   return (
-    <FetchApi/>
-    // <PostApi/>
+    <><FetchApi /><PostApi /></>
   );
 }
 

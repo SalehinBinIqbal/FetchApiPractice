@@ -1,23 +1,81 @@
 import React, { useState, useEffect } from "react";
 
-function PostApi() {
-  const [postId, setPostId] = useState(null);
+import classes from "./PostApi.module.css";
 
-  useEffect(() => {
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title: "React Hooks POST Request Example" }),
-    };
-    fetch("https://reqres.in/api/posts", requestOptions)
-      .then((response) => response.json())
-      .then((data) => setPostId(data.id));
-  }, []);
+function PostApi() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [buttonText, setButtonText] = useState("Create");
+  const [prompt, setPrompt] = useState("");
+
+  const postData = async (e) => {
+    e.preventDefault();
+    setButtonText("Loading...");
+    try {
+      fetch("https://httpbin.org/post", {
+        method: "POST",
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: password,
+        }),
+      }).then((res) => {
+        console.log(res);
+        if (res.ok) {
+          const resJson = res.json();
+          setName("");
+          setEmail("");
+          setPassword("");
+          setButtonText("Create");
+          setPrompt("User created successfully");
+        } else setPrompt("Opps! Something bad happened");
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // useEffect(() => {
+  //   const requestOptions = {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ title: "React Hooks POST Request Example" }),
+  //   };
+  //   fetch("https://reqres.in/api/posts", requestOptions)
+  //     .then((response) => response.json())
+  //     .then((data) => setPostId(data.id));
+  // }, []);
 
   return (
-    <div>
-      <h1>POST Request with React Hooks</h1>
-      <div>Returned Id: {postId}</div>
+    <div className={classes.container}>
+      <form onSubmit={postData}>
+        <input
+          type="text"
+          value={name}
+          placeholder="Name"
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          value={email}
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          value={password}
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+
+        <button type="submit">{buttonText}</button>
+
+        <div className={classes.message}>{prompt && <p>{prompt}</p>}</div>
+      </form>
     </div>
   );
 }
