@@ -48,35 +48,38 @@ function PostApi() {
   // }, []);
 
   return (
-    <div className={classes.container}>
-      <form onSubmit={postData}>
-        <input
-          type="text"
-          value={name}
-          placeholder="Name"
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          value={email}
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          value={password}
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+    <>
+      <h1>Post Method</h1>
+      <div className={classes.container}>
+        <form onSubmit={postData}>
+          <input
+            type="text"
+            value={name}
+            placeholder="Name"
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            value={email}
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            value={password}
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-        <button type="submit">{buttonText}</button>
+          <button type="submit">{buttonText}</button>
 
-        <div className={classes.message}>{prompt && <p>{prompt}</p>}</div>
-      </form>
-    </div>
+          <div className={classes.message}>{prompt && <p>{prompt}</p>}</div>
+        </form>
+      </div>
+    </>
   );
 }
 

@@ -38,7 +38,7 @@ function FetchApi() {
 
   return (
     <>
-      {error && <h1>There is a error</h1>}
+      {error ? <h1>There is a error</h1> : <h1>Get Method</h1>}
       <div className={classes.tableHead}>
         <p>ID</p>
         <p>Name</p>
