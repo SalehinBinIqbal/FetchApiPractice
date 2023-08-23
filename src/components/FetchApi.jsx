@@ -24,7 +24,7 @@ function FetchApi() {
 
   const showData = async () => {
     try {
-      const res = await fetch("https://api.npms.io/v2/search?q=react");
+      const res = await fetch("https://reqres.in/api/posts");
       if (!res.ok) {
         throw res;
       }
@@ -39,28 +39,20 @@ function FetchApi() {
     <>
       {error && <h1>There is a error</h1>}
       <div className={classes.tableHead}>
-        <div className={classes.headWrapper}>
-          <p>Name</p>
-          <p>Email</p>
-        </div>
-        <p>Score</p>
+        <p>ID</p>
+        <p>Name</p>
+        <p>Year</p>
+        <p>Color</p>
       </div>
       <button onClick={showData}>Show Data</button>
       {data &&
-        data.results.map((info) => {
+        data.data.map((info) => {
           return (
-            <div className={classes.items}>
-              <div>
-                {info.package.maintainers.map((item, index) => {
-                  return (
-                    <div className={classes.item} key={index}>
-                      <p>{item.username}</p>
-                      <p>{item.email}</p>
-                    </div>
-                  );
-                })}
-              </div>
-              <p>{info.score.final}</p>
+            <div className={classes.item} key={info.id}>
+              <p>{info.id}</p>
+              <p>{info.name}</p>
+              <p>{info.year}</p>
+              <p>{info.color}</p>
             </div>
           );
         })}
