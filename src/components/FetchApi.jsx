@@ -24,16 +24,13 @@ function FetchApi() {
 
   const showData = async () => {
     try {
-      fetch("https://reqres.in/api/posts")
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          throw res;
-        })
-        .then((data) => {
-          setData(data);
-        });
+      const res = await fetch("https://reqres.in/api/posts");
+      if (res.ok) {
+        const resJson = await res.json();
+        setData(resJson);
+      } else {
+        throw res;
+      }
     } catch (error) {
       setError(error);
     }

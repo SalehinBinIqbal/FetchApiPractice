@@ -13,25 +13,24 @@ function PostApi() {
     e.preventDefault();
     setButtonText("Loading...");
     try {
-      fetch("https://httpbin.org/post", {
+      const res = await fetch("https://httpbin.org/post", {
         method: "POST",
         body: JSON.stringify({
           name: name,
           email: email,
           password: password,
         }),
-      }).then((res) => {
-        console.log(res);
-        if (res.ok) {
-          const resJson = res.json();
-          console.log(resJson);
-          setName("");
-          setEmail("");
-          setPassword("");
-          setButtonText("Create");
-          setPrompt("User created successfully");
-        } else setPrompt("Opps! Something bad happened");
       });
+      console.log(res);
+      const resJson = await res.json();
+      console.log(resJson);
+      if (res.ok) {
+        setName("");
+        setEmail("");
+        setPassword("");
+        setButtonText("Create");
+        setPrompt("User created successfully");
+      } else setPrompt("Opps! Something bad happened");
     } catch (error) {
       console.log(error);
     }
